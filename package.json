@@ -4,9 +4,6 @@
   "description": "Uses discord.js to read announcements and socket.io to serve them.",
   "main": "server.js",
   "author": "Justin McGettigan",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
     "discord.io": "^2.5.3",
     "discord.js": "^11.5.1",
