@@ -3,7 +3,7 @@
 const server = require('http').createServer();
 const discord = require('discord.js');
 
-const { channel_id, bot_token, PORT } = require('./config.json');
+const { channel_id, bot_token } = require('./config.json');
 let PORT = process.env.PORT || 3000
 let channel = null
 let announcements = []
