@@ -1,12 +1,17 @@
 // server.js
 
-const server = require('http').createServer();
+//const server = require('http').createServer();
 const discord = require('discord.js');
 
 const { channel_id, bot_token, local_PORT } = require('./config.json');
 let PORT = process.env.PORT || local_PORT
 let channel = null
 let announcements = []
+const INDEX = 'index.html';
+
+const server = require('express')()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const bot = new discord.Client({
   autorun: true,
@@ -54,4 +59,4 @@ bot.on('ready', (event) => {
 
 bot.login(bot_token)
 
-server.listen(PORT, () => { console.log('listening on *:' + PORT); });
+//server.listen(PORT, () => { console.log('listening on *:' + PORT); });
