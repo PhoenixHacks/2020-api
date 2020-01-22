@@ -18,7 +18,7 @@ const server = require('express')()
 
 const bot = new discord.Client({
   autorun: true,
-  token: bot_token
+  token: BOT_TOKEN
 });
 
 const io = require('socket.io')(server, {
@@ -28,7 +28,7 @@ const io = require('socket.io')(server, {
 
 bot.on('ready', (event) => {
   console.log('Logged in as %s - %s\n', bot.user.tag, bot.user.id);
-  channel = bot.channels.get(channel_id);
+  channel = bot.channels.get(CHANNEL_ID);
 
   // Get Announcements
   channel.fetchMessages({ limit: 20 })
@@ -50,7 +50,7 @@ bot.on('ready', (event) => {
   });
 
   bot.on('message', m => {
-    if (m.channel.id === channel_id) {
+    if (m.channel.id === CHANNEL_ID) {
       announcements.push({
         "time": m.createdAt, 
         "message": m.content 
@@ -60,6 +60,6 @@ bot.on('ready', (event) => {
   });
 });
 
-bot.login(bot_token)
+bot.login(BOT_TOKEN)
 
 //server.listen(PORT, () => { console.log('listening on *:' + PORT); });
