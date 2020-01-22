@@ -1,9 +1,12 @@
+// server.js
+
 const server = require('http').createServer();
 const discord = require('discord.js');
 
 const { channel_id, bot_token, PORT } = require('./config.json');
-var channel = null
-var announcements = []
+let PORT = process.env.PORT || 3000
+let channel = null
+let announcements = []
 
 const bot = new discord.Client({
   autorun: true,
@@ -12,7 +15,7 @@ const bot = new discord.Client({
 
 const io = require('socket.io')(server, {
   path: '/announcements',
-  //serveClient: false,
+  serveClient: false,
 });
 
 bot.on('ready', (event) => {
@@ -25,7 +28,7 @@ bot.on('ready', (event) => {
     announcements = messages.map(m => ({
       "time": m.createdAt,
       "message": m.content 
-    }));
+    })).reverse();
   }).catch(console.error);
 
   io.on('connection', (socket) => {
@@ -51,6 +54,4 @@ bot.on('ready', (event) => {
 
 bot.login(bot_token)
 
-server.listen(PORT, () => {
-  console.log('listening on *:' + PORT);
-});
+server.listen(PORT, () => { console.log('listening on *:' + PORT); });
