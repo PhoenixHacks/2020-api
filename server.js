@@ -3,8 +3,11 @@
 //const server = require('http').createServer();
 const discord = require('discord.js');
 
-const { channel_id, bot_token, local_PORT } = require('./config');
-let PORT = process.env.PORT || local_PORT
+const { channel_id, bot_token, port } = require('./config');
+const CHANNEL_ID = process.env.CHANNEL_ID || channel_id
+const BOT_TOKEN = process.env.BOT_TOKEN || bot_token
+const PORT = process.env.PORT || port
+
 let channel = null
 let announcements = []
 const INDEX = 'index.html';
