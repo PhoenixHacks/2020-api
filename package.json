@@ -1,6 +1,6 @@
 {
   "name": "announcements-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Uses discord.js to read announcements and socket.io to serve them.",
   "main": "server.js",
   "author": "Justin McGettigan",
