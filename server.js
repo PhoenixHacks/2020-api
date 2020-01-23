@@ -20,6 +20,7 @@ class DiscordBot {
   }
 
   onReady = () => {
+    // When the bot is initialized...
     this.bot.on('ready', () => {
       console.log('Logged in as %s - %s\n', this.bot.user.tag, this.bot.user.id);
       channel = this.bot.channels.get(CHANNEL_ID);
@@ -36,7 +37,6 @@ class DiscordBot {
       }).catch(console.error);
 
       this.ss.onConnection()
-  
       this.onMessage();
       this.onMessageUpdate();
       this.onMessageDelete();
