@@ -95,7 +95,6 @@ class SocketServer {
     const io = require('socket.io')(server, {
       path: '/announcements',
       serveClient: false,
-      origins: '*:*'
     });
 
     this.io = io;
