@@ -1,5 +1,5 @@
 // server.js
-const CHANNEL_ID = process.env.CHANNEL_ID || '666881141126725642';
+const CHANNEL_ID = process.env.CHANNEL_ID || '669767220766703626';//'666881141126725642';
 const BOT_TOKEN = process.env.BOT_TOKEN || 'NjY2ODUxNTEzNzI0OTYwNzg5.Xh_SmA.SjjrZQi7q_eHfB-E9wke3hCeIw8';
 const PORT = process.env.PORT || 3001;
 let announcements = [], channel;
@@ -84,6 +84,8 @@ class DiscordBot {
   }
 }
 
+//=============================================================================
+
 class SocketServer {
   constructor() {
     const server = require('express')()
@@ -93,6 +95,15 @@ class SocketServer {
     const io = require('socket.io')(server, {
       path: '/announcements',
       serveClient: false,
+      handlePreflightRequest: (req, res) => {
+        const headers = {
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Origin": "https://live.phoenixhacks.com",
+            "Access-Control-Allow-Credentials": true
+        };
+        res.writeHead(200, headers);
+        res.end();
+      }
     });
 
     this.io = io;
