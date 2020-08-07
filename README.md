@@ -1,4 +1,7 @@
+<a href="https://live.phoenixhacks.com"><img src="https://github.com/PhoenixHacks.png?size=100" title="PhoenixHacks Live" alt="PhoenixHacks Live"></a>
 # [PhoenixHacks 2020 API](https://phoenixhacks-api.herokuapp.com/)
+
+> An API server, with a Discord bot, built for PhoenixHacks (Spring 2020).
 
 ### Installation
 `git clone` the repo to a desired directory.
