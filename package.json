@@ -5,11 +5,9 @@
   "main": "server.js",
   "author": "Justin McGettigan",
   "dependencies": {
-    "discord.io": "^2.5.3",
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
     "heroku": "^7.36.3",
-    "now": "^16.7.3",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
   }

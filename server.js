@@ -1,7 +1,8 @@
 // server.js
-const CHANNEL_ID = process.env.CHANNEL_ID || '669767220766703626';//'666881141126725642';
-const BOT_TOKEN = process.env.BOT_TOKEN || 'NjY2ODUxNTEzNzI0OTYwNzg5.Xh_SmA.SjjrZQi7q_eHfB-E9wke3hCeIw8';
-const PORT = process.env.PORT || 3001;
+const config = require('./config');
+const CHANNEL_ID = process.env.CHANNEL_ID || config.channel_id;// || '669767220766703626';//'666881141126725642';
+const BOT_TOKEN = process.env.BOT_TOKEN || config.bot_token;// || 'NjY2ODUxNTEzNzI0OTYwNzg5.Xh_SmA.SjjrZQi7q_eHfB-E9wke3hCeIw8';
+const PORT = process.env.PORT || config.port;
 let announcements = [], channel;
 
 const deletedMessageFilter = () => ((message) => !message.deleted);
@@ -19,7 +20,7 @@ class DiscordBot {
     this.ss = ss;
   }
 
-  onReady = () => {
+  onReady() {
     // When the bot is initialized...
     this.bot.on('ready', () => {
       console.log('Logged in as %s - %s\n', this.bot.user.tag, this.bot.user.id);
@@ -43,7 +44,7 @@ class DiscordBot {
     });
   }
 
-  onMessage = () => {
+  onMessage() {
     // When a new message is created, add it to the announcements
     this.bot.on('message', m => {
       if (m.channel.id === CHANNEL_ID) {
@@ -57,7 +58,7 @@ class DiscordBot {
     });
   }
 
-  onMessageUpdate = () => {
+  onMessageUpdate() {
     // Find the message edited in announcements and replace the content
     this.bot.on('messageUpdate', (om, nm) => {
       if (nm.channel.id === CHANNEL_ID) {
@@ -68,7 +69,7 @@ class DiscordBot {
     });
   }
 
-  onMessageDelete = () => {
+  onMessageDelete() {
     // Find the message deleted in announcements and remove it
     this.bot.on('messageDelete', (m) => {
       if (m.channel.id === CHANNEL_ID) {
@@ -79,7 +80,7 @@ class DiscordBot {
     });
   }
 
-  login = () => {
+  login() {
     this.bot.login(BOT_TOKEN);
   }
 }
@@ -95,12 +96,13 @@ class SocketServer {
     const io = require('socket.io')(server, {
       path: '/announcements',
       serveClient: false,
+      perMessageDeflate: false
     });
 
     this.io = io;
   }
 
-  onConnection = () => {
+  onConnection() {
     // When a user connects to the server, open a socket and emit announcements.
     this.io.on('connection', (socket) => {
       console.log(`Socket ${socket.id} connected.`);
@@ -112,7 +114,7 @@ class SocketServer {
     });
   }
 
-  emit = () => {
+  emit() {
     this.io.emit('announcements', announcements);
   }
 }
